@@ -20,6 +20,10 @@ class Thermostat < Sinatra::Base
     #   JSON.generate({temp: 20})
     # end
     content_type :json
+    if !session[:work] 
+    	session[:work] = 20
+    end
+
     p ({temp: session[:work]}).to_json
   end
 

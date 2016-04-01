@@ -32,12 +32,12 @@ $( document ).ready(function(){
 
   function updateTemp(){
     console.log(thermostat.temp);
-    console.log(grabTemp());
-    console.log(thermostat.temp);
+
+    grabTemp();
     // console.log(thermostat.temp);
-  	$("#temp").text("Current temperature: " + thermostat.temp);
-  	$('#temp').attr('class', thermostat.displayColor());
-    $("button[name='tempChange']").attr('value', thermostat.temp);
+    // console.log(thermostat.temp);
+
+
   }
 
 
@@ -77,18 +77,15 @@ $( document ).ready(function(){
     //     thermostat.temp = data;
     //   });
     function grabTemp(){
-      $.ajax({
-        url:"http://localhost:4567/temperature",
-
-        type: "GET",
-
-        dataType: "json",
-
-        success: function(data){
-          callback(data);
+      $.getJSON("http://localhost:4567/temperature", function(data){
+        thermostat.temp = data.temp;
+        $("#temp").text("Current temperature: " + thermostat.temp);
+        $('#temp').attr('class', thermostat.displayColor());
+        $("button[name='tempChange']").attr('value', thermostat.temp);
         }
-      });
-      // .done(function( data ) {
+      );
+    };
+
       //   if (data.temp === null){
       //     return 20;
       //   }
@@ -96,7 +93,7 @@ $( document ).ready(function(){
       //     return data.temp;
       //   }
       // });
-    }
+
     //     // .fail(function( xhr, status, errorThrown) {
     //     //   alert("You fucked up good");
     //     // })
