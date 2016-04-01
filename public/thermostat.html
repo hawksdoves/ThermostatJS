@@ -6,18 +6,18 @@
 	<h1> Thermostat</h1>
 		<label>Power Saving Mode</label>
 		<input type="checkbox" value="Power Saving Mode">
-	<div id="temp"><h2> The current temperature is ... </h2></div>
+	<div id="temp" name="temp"></div>
 	<p id='city'>Pick city:</p>
 
 		<input type='text' id='pickcity' placeholder='City'>
 		<input type='submit' value='Submit'>
 
 	<p id="getweather"></p>
-		<input type="submit" value="Increase Temp" >
-		<input type="submit" value="Reset Temp">
-		<input type="submit" value="Decrease Temp">
+		<button type="submit" name="tempChange" id="IncreaseTemp">Increase Temp</button>
+		<button type="submit" name="tempChange" id="ResetTemp" >Reset Temp</button>
+		<button type="submit" name="tempChange" id="DecreaseTemp" >Decrease Temp</button>
 	<script src='jquery.min.js'></script>
 	<script src='interface.js'></script>
-	<script src='./jasmine/src/Thermostat.js'></script>
+	<script src='Thermostat.js'></script>
 
 </body>
