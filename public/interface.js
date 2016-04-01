@@ -32,17 +32,22 @@ $( document ).ready(function(){
 
   function updateTemp(){
     postTemp();
-    grabTemp();
+    console.log(thermostat.temp);
+    console.log(grabTemp());
+    console.log(thermostat.temp);
+
+    // console.log(thermostat.temp);
   	$("#temp").text("Current temperature: " + thermostat.temp);
   	$('#temp').attr('class', thermostat.displayColor());
     $("button[name='tempChange']").attr('value', thermostat.temp);
-  };
+  }
 
 
   $("input[type='checkbox']").prop('checked', true);
 
   $("#IncreaseTemp").click(function(event){
     thermostat.upButton();
+    // postTemp();
     updateTemp();
   });
 
@@ -61,16 +66,18 @@ $( document ).ready(function(){
       thermostat.powerSavingOn();
     } else {
     	thermostat.powerSavingOff();
-    };
+    }
     updateTemp();
 	});
 
-    function postTemp(){  
+    function postTemp(){
       $.post("http://localhost:4567/temperature", {temp: thermostat.temp} );
-    };
-    
-
-
+    }
+    //
+    // function grabTemp(){
+    //   $.get("http://localhost:4567/temperature", function(data){
+    //     thermostat.temp = data;
+    //   });
     function grabTemp(){
       $.ajax({
         url:"http://localhost:4567/temperature",
@@ -78,22 +85,23 @@ $( document ).ready(function(){
         type: "GET",
 
         dataType: "json",
-      })
-        .done(function( data ) {
-          console.log( data );
-          
-        })
-        .fail(function( xhr, status, errorThrown) {
-          alert("You fucked up good");
-        })
-        .always(function(xhr, status){
-          alert("It did something");
-        });
-    };
+      });
+    }
+    //     // .done(function( data ) {
+    //     //   thermostat.temp = data;
+    //     //   console.log('in .done ' + thermostat.temp);
+    //     // })
+    //     // .fail(function( xhr, status, errorThrown) {
+    //     //   alert("You fucked up good");
+    //     // })
+    //     // .always(function(xhr, status){
+    //     //   alert("It did something");
+    //     // });
+    // }
 
 
       // $.ajax({
-      //   type: "POST", 
+      //   type: "POST",
       //   url:"http://localhost:4567/temperature",
       //   data: {temp: thermostat.temp};
       //   dataType: "json",
@@ -114,7 +122,7 @@ $( document ).ready(function(){
     //   })
     //     .done(function( data ) {
     //       alert(data);
-          
+
     //     })
     //     .fail(function( xhr, status, errorThrown) {
     //       alert("You fucked up good");
@@ -124,9 +132,5 @@ $( document ).ready(function(){
     //     });
 
     // });
-
-
-
-
 
 });

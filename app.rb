@@ -2,17 +2,25 @@ require 'sinatra/base'
 require 'json'
 
 class Thermostat < Sinatra::Base
-  
+
+  enable :sessions
+
   get '/' do
     redirect '/thermostat.html'
   end
 
   post '/temperature' do
-  	p session[:work] = params[:temp]
+  	session[:work] = params[:temp].to_i
   end
 
   get '/temperature' do
-  	p session[:work]
+    # if session[:work]
+    #   JSON.generate({temp: session[:work]})
+    # else
+    #   JSON.generate({temp: 20})
+    # end
+    content_type :json
+    p ({temp: session[:work]}).to_json
   end
 
   # start the server if ruby file executed directly
