@@ -31,11 +31,9 @@ $( document ).ready(function(){
   });
 
   function updateTemp(){
-    postTemp();
     console.log(thermostat.temp);
     console.log(grabTemp());
     console.log(thermostat.temp);
-
     // console.log(thermostat.temp);
   	$("#temp").text("Current temperature: " + thermostat.temp);
   	$('#temp').attr('class', thermostat.displayColor());
@@ -47,7 +45,7 @@ $( document ).ready(function(){
 
   $("#IncreaseTemp").click(function(event){
     thermostat.upButton();
-    // postTemp();
+    postTemp();
     updateTemp();
   });
 
@@ -85,12 +83,20 @@ $( document ).ready(function(){
         type: "GET",
 
         dataType: "json",
+
+        success: function(data){
+          callback(data);
+        }
       });
+      // .done(function( data ) {
+      //   if (data.temp === null){
+      //     return 20;
+      //   }
+      //   else {
+      //     return data.temp;
+      //   }
+      // });
     }
-    //     // .done(function( data ) {
-    //     //   thermostat.temp = data;
-    //     //   console.log('in .done ' + thermostat.temp);
-    //     // })
     //     // .fail(function( xhr, status, errorThrown) {
     //     //   alert("You fucked up good");
     //     // })
